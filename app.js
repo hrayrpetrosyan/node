@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+require('dotenv').config();
+
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const errorController = require('./controllers/error');
@@ -40,7 +42,7 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    'mongodb+srv://Hrayr:1gohardlikePutin!@cluster0-ntrwp.mongodb.net/shop?retryWrites=true'
+    'mongodb+srv://${process.env.DB_PROJECT}:${process.env.DB_PASS}@cluster0-ntrwp.mongodb.net/shop?retryWrites=true'
   )
   .then(result => {
     User.findOne().then(user => {
